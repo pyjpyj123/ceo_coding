@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <Script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <Script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+
+    <title>Welcome to Firebase Hosting</title>
+    <script>
+
+    $(document).ready(()=>{
+
+      function joinCall(){
+        let idvalue = $("#idvalue").val();
+        let pwdvalue = $("#pwdvalue").val();
+        $.ajax({
+            url: "https://us-central1-testdatabase777.cloudfunctions.net/join",
+            type: "POST",
+            data: {id:idvalue, pwd:pwdvalue},
+            dataType: "json"
+        })
+        .done(function(json) {
+        });
+      };
+
+
+      function loginCall(){
+        let idvalue = $("#idvalue").val();
+        let pwdvalue = $("#pwdvalue").val();
+        $.ajax({
+            url: "https://us-central1-testdatabase777.cloudfunctions.net/login",
+            type: "POST",
+            data: {id:idvalue, pwd:pwdvalue},
+            dataType: "json"
+        })
+        .done(function(json) {
+           if(jason["result_code"]==1){
+             loadMsgs();
+           }else if(json["result_code"]==2){
+             alert(json["result"]);
+           }else if(json["result_code"]==3){
+             alert(json["result"]);
+           }
+         });
+
+      }
+
+
+      function sendCall(){
+        let phoneval = $("#phone").val();
+
+        $.ajax({
+            url: "https://us-central1-testdatabase777.cloudfunctions.net/sendSMS",
+            type: "POST",
+            data: {phone:phoneval},
+            dataType: "json"
+        })
+        .done(function(json) {
+          console.log(json);
+        });
+      }
+
+          $("#join").on("click",()=>{
+            joinCall();
+            })
+
+          $("#login").on("click", ()=>{
+            loginCall();
+            })
+
+          $("#sned").on("click", ()=>{
+            sendCall();
+            })
+
+         })
+
+
+    </script>
+
+
+  </head>
+  <body>
+    <input type="text" id="idvalue" placeholder="아이디">
+    <input type="text" id="pwdvalue" placeholder="패스워드">
+    <input type="text" id="phone" placeholder="휴대폰 번호">
+
+    <button id ="join"> 회원가입 </button>
+    <button id ="login"> 로그인 </button>
+    <button id ="send"> 메시지 보내기 </button>
+
+
+    <div id="chatlist">
+      채팅 내용
+    </div>
+
+  </body>
+</html>

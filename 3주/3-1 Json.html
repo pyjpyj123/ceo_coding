@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta namte="viewpoint" content="width=device-width, initial-scale=1">
+    <title>Json 예제 실습</title>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+    <script>
+      $(document).ready(()=>{
+        let bbb = ["박영진", 33, 176, 70, "abc@naver.com", "O"];
+
+        let aaaJson = {
+          name : "박영진",
+          age : 33,
+          height : 176,
+          weight : 70,
+          email : "abc@naver.com",
+          type : "O",
+      };
+
+      let userlist = [
+        {name:"ㅅㅅㅅ",age:33,type:"O"},
+        {name:"ㅁㅁㅁ",age:34,type:"A"},
+        {name:"ㅂㅂㅂ",age:35,type:"B"},
+        {name:"ㄹㄹㄹ",age:36,type:"AB"},
+        {name:"ㅎㅎㅎ",age:37,type:"A"},
+        {name:"ㄱㄱㄱ",age:38,type:"B"},
+      ];
+
+      for(i=0;i<6;i++){
+        $("#userlist").append("<div>"+userlist[i]["name"]+userlist[i]["type"]+"</div>");
+      }
+
+    });
+
+    </script>
+  </head>
+
+  <body>
+    <div id="userlist">
+    </div>
+  </body>
+
+</html>
